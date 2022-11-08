@@ -1,0 +1,26 @@
+---
+
+- name: Supervisor is installed
+  apt:
+    pkg: supervisor
+    state: present
+
+- name: Supervisor is running
+  service:
+    name: supervisor
+    state: started
+    enabled: yes
+
+- name: Ensure supervisor.service.d directory present
+  file:
+    path: /lib/systemd/system/Supervisor.service.d
+    state: directory
+
+- name: Ensure file-limit.conf present
+  copy:
+    dest: /lib/systemd/system/supervisor.service.d/file-limit.conf
+    content: |
+      [Service]
+      LimitNOFILE={{ supervisor_nofile }}
+  notify:
+    - restart supervisor service
