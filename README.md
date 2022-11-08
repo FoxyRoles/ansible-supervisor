@@ -1,6 +1,6 @@
 # ansible-supervisor
 
-Setups Docker.
+Setups [Supervisor](http://supervisord.org/): A Process Control System.
 
 ### Example playbook
 ```yaml
